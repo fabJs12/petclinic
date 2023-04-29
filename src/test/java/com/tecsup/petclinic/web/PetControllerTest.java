@@ -1,4 +1,4 @@
-package com.tecsup.petclinic.controllers;
+package com.tecsup.petclinic.web;
 
 import static org.hamcrest.CoreMatchers.is;
 //import static org.hamcrest.Matchers.hasSize;

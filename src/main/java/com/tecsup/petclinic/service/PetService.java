@@ -1,8 +1,8 @@
-package com.tecsup.petclinic.services;
+package com.tecsup.petclinic.service;
 
 import java.util.List;
 
-import com.tecsup.petclinic.entities.Pet;
+import com.tecsup.petclinic.entity.Pet;
 import com.tecsup.petclinic.exception.PetNotFoundException;
 
 /**
