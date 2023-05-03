@@ -1,8 +1,6 @@
-package com.tecsup.petclinic.dto;
+package com.tecsup.petclinic.domain;
 
 import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -12,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @author jgomezm
  *
  */
-public class PetDTO {
+public class PetTO {
 
 	private long id;
 	
@@ -26,7 +24,7 @@ public class PetDTO {
 	@JsonFormat(pattern = "yyyy-MM-dd",  timezone = "GMT+8")
 	private Date birthDate;
 
-	public PetDTO(String name, int typeId, int ownerId, Date birthDate) {
+	public PetTO(String name, int typeId, int ownerId, Date birthDate) {
 		super();
 		this.name = name;
 		this.typeId = typeId;

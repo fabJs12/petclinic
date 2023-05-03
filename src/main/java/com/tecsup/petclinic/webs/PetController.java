@@ -1,4 +1,4 @@
-package com.tecsup.petclinic.controllers;
+package com.tecsup.petclinic.webs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tecsup.petclinic.dto.PetDTO;
+import com.tecsup.petclinic.domain.PetTO;
 import com.tecsup.petclinic.entities.Pet;
 import com.tecsup.petclinic.exception.PetNotFoundException;
 import com.tecsup.petclinic.services.PetService;
@@ -60,7 +60,7 @@ public class PetController {
 	 */
 	@PostMapping("/pets")
 	@ResponseStatus(HttpStatus.CREATED)
-	Pet create(@RequestBody PetDTO newPet) {
+	Pet create(@RequestBody PetTO newPet) {
 		Pet pet = new Pet();
 		pet.setName(newPet.getName());
 		pet.setOwnerId(newPet.getOwnerId());
@@ -95,7 +95,7 @@ public class PetController {
 	 * @return
 	 */
 	@PutMapping("/pets/{id}")
-	Pet saveOrUpdate(@RequestBody PetDTO newPet, @PathVariable Long id) {
+	Pet saveOrUpdate(@RequestBody PetTO newPet, @PathVariable Long id) {
 		Pet pet = null;
 		try {
 			pet = service.findById(id);

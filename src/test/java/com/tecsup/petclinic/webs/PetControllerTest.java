@@ -1,4 +1,4 @@
-package com.tecsup.petclinic.controllers;
+package com.tecsup.petclinic.webs;
 
 import static org.hamcrest.CoreMatchers.is;
 //import static org.hamcrest.Matchers.hasSize;
@@ -27,7 +27,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
-import com.tecsup.petclinic.dto.PetDTO;
+import com.tecsup.petclinic.domain.PetTO;
 /**
  * 
  */
@@ -124,7 +124,7 @@ public class PetControllerTest {
 		String DATE_REF = "2021-10-03";
 		Date DATE = new SimpleDateFormat("yyyy-MM-dd").parse(DATE_REF);
 		
-		PetDTO newPet = new PetDTO(NAME_PET, TYPE_ID, OWNER_ID, DATE);
+		PetTO newPet = new PetTO(NAME_PET, TYPE_ID, OWNER_ID, DATE);
 	    
 		logger.info(newPet.toString());
 		logger.info(om.writeValueAsString(newPet));
@@ -155,7 +155,7 @@ public class PetControllerTest {
 		String DATE_REF = "2021-10-03";
 		Date DATE = new SimpleDateFormat("yyyy-MM-dd").parse(DATE_REF);
 		
-		PetDTO newPet = new PetDTO(NAME_PET, TYPE_ID, OWNER_ID, DATE);
+		PetTO newPet = new PetTO(NAME_PET, TYPE_ID, OWNER_ID, DATE);
 		
 		ResultActions mvcActions = mockMvc.perform(post("/pets")
 	            .content(om.writeValueAsString(newPet))
