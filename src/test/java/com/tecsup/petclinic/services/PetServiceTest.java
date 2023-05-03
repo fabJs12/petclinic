@@ -1,7 +1,7 @@
-package com.tecsup.petclinic.service;
+package com.tecsup.petclinic.services;
 
 
-import com.tecsup.petclinic.entity.Pet;
+import com.tecsup.petclinic.entities.Pet;
 import com.tecsup.petclinic.exception.PetNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;

@@ -1,15 +1,14 @@
-package com.tecsup.petclinic.service;
+package com.tecsup.petclinic.services;
 
 import java.util.List;
 import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tecsup.petclinic.entity.Pet;
+import com.tecsup.petclinic.entities.Pet;
 import com.tecsup.petclinic.exception.PetNotFoundException;
-import com.tecsup.petclinic.repository.PetRepository;
+import com.tecsup.petclinic.repositories.PetRepository;
 
 /**
  * 
