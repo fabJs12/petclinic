@@ -125,7 +125,7 @@ public class PetServiceTest {
         int UP_OWNER_ID = 2;
         int UP_TYPE_ID = 2;
 
-        Pet pet = new Pet(PET_NAME, OWNER_ID, TYPE_ID);
+        Pet pet = new Pet(PET_NAME, OWNER_ID, TYPE_ID, null);
 
         // ------------ Create ---------------
 
@@ -162,7 +162,7 @@ public class PetServiceTest {
 
         // ------------ Create ---------------
 
-        Pet pet = new Pet(PET_NAME, OWNER_ID, TYPE_ID);
+        Pet pet = new Pet(PET_NAME, OWNER_ID, TYPE_ID, null);
         pet = this.petService.create(pet);
         log.info("" + pet);
 
