@@ -2,9 +2,9 @@ package com.tecsup.petclinic.webs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
-import com.tecsup.petclinic.domain.PetTO;
+import com.tecsup.petclinic.dtos.PetDTO;
 import com.tecsup.petclinic.entities.Pet;
-import com.tecsup.petclinic.exception.PetNotFoundException;
+import com.tecsup.petclinic.exceptions.PetNotFoundException;
 import com.tecsup.petclinic.mapper.PetMapper;
 import com.tecsup.petclinic.repositories.PetRepository;
 import com.tecsup.petclinic.services.PetService;
@@ -19,14 +19,13 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -46,10 +45,10 @@ public class PetControllerMockitoTest {
 	@Autowired
 	private MockMvc mockMvc;
 
-	@MockBean
+	@MockitoBean
 	private PetRepository petRepository;
 
-	@MockBean
+	@MockitoBean
 	private PetService petService;
 
 	PetMapper mapper = Mappers.getMapper(PetMapper.class);
@@ -69,9 +68,9 @@ public class PetControllerMockitoTest {
 		int NRO_RECORD = 5;
 		int ID_FIRST_RECORD = 1;
 
-		List<PetTO> petTOs  = TObjectCreator.getAllPetTOs();
+		List<PetDTO> petTOs  = TObjectCreator.getAllPetTOs();
 
-		List<Pet> pets  = this.mapper.toPetList(petTOs);
+		List<Pet> pets  = this.mapper.mapToEntityList(petTOs);
 
 		Mockito.when(petService.findAll())
 				.thenReturn(pets);
@@ -94,12 +93,12 @@ public class PetControllerMockitoTest {
 	@Test
 	public void testFindPetOK() throws Exception {
 
-		PetTO petTO  = TObjectCreator.getPetTO();
+		PetDTO petTO  = TObjectCreator.getPetTO();
 
-		Pet pet  = this.mapper.toPet(petTO);
+		//Pet pet  = this.mapper.mapToEntity(petTO);
 
-		Mockito.when(petService.findById(pet.getId()))
-				.thenReturn(pet);
+		Mockito.when(petService.findById(petTO.getId()))
+				.thenReturn(petTO);
 
 		mockMvc.perform(get("/pets/1"))  // Object must be BASIL
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -135,12 +134,12 @@ public class PetControllerMockitoTest {
 	@Test
 	public void testCreatePet() throws Exception {
 
-		PetTO newPetTO  = TObjectCreator.newPetTO();
+		PetDTO newPetTO  = TObjectCreator.newPetTO();
 
-		Pet newPet  = this.mapper.toPet(newPetTO);
+		//Pet newPet  = this.mapper.mapToEntity(newPetTO);
 
-		Mockito.when(petService.create(newPet))
-				.thenReturn(newPet);
+		Mockito.when(petService.create(newPetTO))
+				.thenReturn(newPetTO);
 
 		mockMvc.perform(post("/pets")
 				.content(om.writeValueAsString(newPetTO))
@@ -165,12 +164,12 @@ public class PetControllerMockitoTest {
 
 		// ------------ Create ---------------
 
-		PetTO newPetTO  = TObjectCreator.newPetTOForDelete();
+		PetDTO newPetTO  = TObjectCreator.newPetTOForDelete();
 
-		Pet newPet  = this.mapper.toPet(newPetTO);
+		//Pet newPet  = this.mapper.mapToEntity(newPetTO);
 
-		Mockito.when(petService.create(newPet))
-				.thenReturn(newPet);
+		Mockito.when(petService.create(newPetTO))
+				.thenReturn(newPetTO);
 
 		ResultActions mvcActions = mockMvc.perform(post("/pets")
 				.content(om.writeValueAsString(newPetTO))
@@ -183,7 +182,7 @@ public class PetControllerMockitoTest {
 
 		// ------------ Delete ---------------
 
-		Mockito.doNothing().when(this.petService).delete(newPet.getId());
+		Mockito.doNothing().when(this.petService).delete(newPetTO.getId());
 
 		Integer id = JsonPath.parse(response).read("$.id");
 
